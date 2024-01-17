@@ -66,8 +66,8 @@ namespace ProjectCiphers
 
             return tableWords;
         }
-       string VerticalTranspositionCipher(string sourceText, string key = "книга")
-{
+   string VerticalTranspositionCipher(string sourceText, string key = "книга")
+            {
     string uniqueKey = new string(key.Distinct().ToArray());
     char[] keys = uniqueKey.ToCharArray();
     Array.Sort(keys);
@@ -617,7 +617,7 @@ namespace ProjectCiphers
                 case 4:
                     {
                         
-                        richTextBox2.Text = VerticalTranspositionCipherDecryption(richTextBox2.Text, toolStripTextBox1.Text);
+                        richTextBox2.Text = VerticalTranspositionCipher(richTextBox1.Text, toolStripTextBox1.Text);
                     }
                     break;
                 case 6:
