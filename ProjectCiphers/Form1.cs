@@ -179,7 +179,7 @@ namespace ProjectCiphers
                     }
                 }
             }
-            return '\0'; // Возвращаем '\0', если не найдено подходящего символа-заполнителя
+            return '\0'; 
         }
         public char[,] createMatrixUnicode(int n, string key)
         {
@@ -236,7 +236,7 @@ namespace ProjectCiphers
 
 
 
-
+ 
 
             placeholdSymbol = '¡';//getPlaceholdSymbol(sourceText, tableUnicode);
 
@@ -422,15 +422,15 @@ namespace ProjectCiphers
         /// <returns></returns>
         public string CipherVijinerEcryption(string sourceText, string key = "key")
         {
-            var ciphersText = new StringBuilder(); // Используем StringBuilder для оптимизации
-            int unicodeRange = 0x10000; // Диапазон для 16-битных символов Unicode
+            var ciphersText = new StringBuilder(); 
+            int unicodeRange = 0x10000;
 
-            // Удлинение ключа до длины исходного текста
+           
             while (key.Length < sourceText.Length)
             {
                 key += key;
             }
-            key = key.Substring(0, sourceText.Length); // Обрезаем ключ до нужной длины
+            key = key.Substring(0, sourceText.Length); 
 
             for (int i = 0; i < sourceText.Length; i++)
             {
@@ -446,9 +446,9 @@ namespace ProjectCiphers
         public string CipherVijinerDecryption(string sourceText, string key = "key")
         {
             var decryptedText = new StringBuilder();
-            int unicodeRange = 0x10000; // Диапазон Unicode для 16 бит (BMP)
+            int unicodeRange = 0x10000; 
 
-            // Убедимся, что ключ достаточно длинный, чтобы покрыть весь текст
+           
             while (key.Length < sourceText.Length)
             {
                 key += key;
@@ -457,14 +457,14 @@ namespace ProjectCiphers
 
             for (int i = 0; i < sourceText.Length; i++)
             {
-                // Преобразование символов в их числовые значения Unicode
+              
                 int sourceCharCode = sourceText[i];
                 int keyCharCode = key[i];
 
-                // Выполнение дешифрования с учетом диапазона Unicode
+                
                 int decryptedCharCode = (sourceCharCode - keyCharCode +1) % 65536;
 
-                // Преобразование обратно в символ и добавление в результат
+                
                 decryptedText.Append((char)decryptedCharCode);
             }
             return decryptedText.ToString();
@@ -480,12 +480,12 @@ namespace ProjectCiphers
             var cipherText = "";
             foreach (var s in sourceText)
             {
-                int code = s; // char automatically converts to its UTF-16 code here
+                int code = s; 
                 int shiftedCode = code - shift;
 
                 if (shiftedCode < 0)
                 {
-                    shiftedCode += 65536; // Wrap around within Unicode-16 range
+                    shiftedCode += 65536; 
                 }
 
                 cipherText += Convert.ToChar(shiftedCode);
@@ -497,12 +497,12 @@ namespace ProjectCiphers
             var cipherText = "";
             foreach (var s in sourceText)
             {
-                int code = s; // char automatically converts to its UTF-16 code here
+                int code = s;
                 int shiftedCode = code + shift;
 
                 if (shiftedCode >= 65536)
                 {
-                    // Wrap around within the Unicode-16 range
+                   
                     shiftedCode -= 65536;
                 }
 
@@ -824,11 +824,11 @@ namespace ProjectCiphers
                             byte[] originalBytes = Encoding.Unicode.GetBytes(original);
                             byte[] encryptedBytes = des1.DesEncrypt(originalBytes, des);
 
-                            // Преобразование в Base64
+                            
                             string encryptedBase64 = Convert.ToBase64String(encryptedBytes);
                             Console.WriteLine("Encrypted (Base64): " + encryptedBase64);
 
-                            // Расшифровка
+                            
                             byte[] decryptedBytes =des1.DesDecrypt(encryptedBytes, des);
                             richTextBox2.Text =  Encoding.Unicode.GetString(decryptedBytes);
 
